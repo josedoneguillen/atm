@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITLA ATM", "ITLA ATM\ITLA ATM.csproj", "{02057DC1-398D-49C8-BC3B-21BEFB37CDE2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{02057DC1-398D-49C8-BC3B-21BEFB37CDE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02057DC1-398D-49C8-BC3B-21BEFB37CDE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02057DC1-398D-49C8-BC3B-21BEFB37CDE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02057DC1-398D-49C8-BC3B-21BEFB37CDE2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {104E541E-9F22-4DDD-A0BC-D882975CAB74}
+	EndGlobalSection
+EndGlobal
