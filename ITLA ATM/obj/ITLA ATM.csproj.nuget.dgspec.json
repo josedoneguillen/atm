@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\enman\\source\\repos\\ITLA ATM\\ITLA ATM\\ITLA ATM.csproj": {}
+    "C:\\Users\\enman\\OneDrive\\Escritorio\\C#\\ITLA ATM\\ITLA ATM\\ITLA ATM.csproj": {}
   },
   "projects": {
-    "C:\\Users\\enman\\source\\repos\\ITLA ATM\\ITLA ATM\\ITLA ATM.csproj": {
+    "C:\\Users\\enman\\OneDrive\\Escritorio\\C#\\ITLA ATM\\ITLA ATM\\ITLA ATM.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\enman\\source\\repos\\ITLA ATM\\ITLA ATM\\ITLA ATM.csproj",
+        "projectUniqueName": "C:\\Users\\enman\\OneDrive\\Escritorio\\C#\\ITLA ATM\\ITLA ATM\\ITLA ATM.csproj",
         "projectName": "ITLA ATM",
-        "projectPath": "C:\\Users\\enman\\source\\repos\\ITLA ATM\\ITLA ATM\\ITLA ATM.csproj",
+        "projectPath": "C:\\Users\\enman\\OneDrive\\Escritorio\\C#\\ITLA ATM\\ITLA ATM\\ITLA ATM.csproj",
         "packagesPath": "C:\\Users\\enman\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\enman\\source\\repos\\ITLA ATM\\ITLA ATM\\obj\\",
+        "outputPath": "C:\\Users\\enman\\OneDrive\\Escritorio\\C#\\ITLA ATM\\ITLA ATM\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\enman\\AppData\\Roaming\\NuGet\\NuGet.Config",
