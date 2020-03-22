@@ -8,7 +8,21 @@ namespace ITLA_ATM
     {
         public static List<C_usuarios> usuario = new List<C_usuarios>(); // este list tiene los datos de los usuarios
 
+
         static void Main(string[] args)
+        {
+
+            usuario.Add(new C_usuarios { numero_tarjeta = "123456", nombre = "Angel", apellido = "Lopez", contra = "Pedro809", saldo = 3000, isadmin = true });
+            usuario.Add(new C_usuarios { numero_tarjeta = "1234567", nombre = "Angel", apellido = "Lopez", contra = "papirata", saldo = 4000 });
+            //Aqui arriba estan algunos usuarios de prueba
+
+
+
+            Menu();
+
+
+        }
+        public static void Menu()
         {
             try
             {
@@ -28,24 +42,41 @@ namespace ITLA_ATM
                                 Console.WriteLine("BIENVENIDO");
                                 Console.ReadKey();
                                 Console.Clear();
+                                Menu_admin.Menu();
                             }
-                            else//si es un cliente se ira al menu de clientes
+                            else if (item.isadmin == false)//si es un cliente se ira al menu de clientes
                             {
                                 Console.WriteLine("BIENVENIDO");
                                 Console.ReadKey();
                                 Console.Clear();
+                                Menu_cliente.Menu();
                             }
 
+
+
+                        }
+                        else
+                        {
+                            Console.WriteLine("Contraseña invalida, vuelva a intentarlo");
+                            Console.ReadKey();
+                            Console.Clear();
+                            Menu();
                         }
                     }
+                    else
+                    {
+                        Console.WriteLine("Usuario invalido, vuelva a intentarlo");
+                        Console.ReadKey();
+                        Console.Clear();
+                        Menu();
+                    }
                 }
+
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Dato erroneo");
             }
-
-
         }
     }
 }

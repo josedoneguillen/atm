@@ -4,15 +4,12 @@ using System.Text;
 
 namespace ITLA_ATM
 {
-    class Menu_admin
+    class Menu_cliente
     {
         public static void Menu()
         {
-            Console.WriteLine("Menu admin");
+            Console.WriteLine("Menu cliente");
             Console.ReadKey();
         }
-        
-        
-
     }
 }
