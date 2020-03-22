@@ -63,14 +63,12 @@ namespace ITLA_ATM
                             Menu();
                         }
                     }
-                    else
-                    {
-                        Console.WriteLine("Usuario invalido, vuelva a intentarlo");
-                        Console.ReadKey();
-                        Console.Clear();
-                        Menu();
-                    }
+                    
                 }
+                Console.WriteLine("# DE TARJETA INVALIDO");
+                Console.ReadKey();
+                Console.Clear();
+                Menu();
 
             }
             catch (Exception ex)
