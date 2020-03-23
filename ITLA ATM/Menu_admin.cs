@@ -46,8 +46,10 @@ namespace ITLA_ATM
                         eliminar_cliente();
                         break;
                     case (int)menu_admin.reiniciar_contra:
+                        reiniciar_contra();
                         break;
                     case (int)menu_admin.agregar_saldo:
+                        agregar_saldo();
                         break;
                     case (int)menu_admin.log_trans:
                         break;
@@ -59,6 +61,10 @@ namespace ITLA_ATM
                         break;
                     case (int)menu_admin.cerrar_sesion:
                         LOGIN.Menu();
+                        break;
+                    default:
+                        Console.WriteLine("Opcion invalida \nVOLVIENDO AL MENU . . .");
+                        Menu();
                         break;
                 }
             }
@@ -317,6 +323,7 @@ namespace ITLA_ATM
                         string a = Console.ReadLine();
                         switch (a)
                         {
+<<<<<<< HEAD
                             case "S":
 
                                 Console.WriteLine("balance actual : " + item.saldo);
@@ -327,6 +334,23 @@ namespace ITLA_ATM
                                 Console.Clear();
                                 
 
+=======
+                            case "S": //Aqui es donde se procesa la transaccion
+                                Console.WriteLine("balance actual : " + item.saldo);
+                                Console.WriteLine("Ingrese el monto a depositar");
+                                double monto = Convert.ToDouble(Console.ReadLine());
+                                Console.Clear();
+                                Console.WriteLine("Nombre : "+item.nombre+" Apellido : "+item.apellido);
+                                Console.WriteLine("Deposito : "+monto+"\nBalance anterior :"+item.saldo);
+                                //Aqui debajo es donde se realiza el registro de todas las transacciones utilizando la clase de transacciones
+                                LOGIN.log_trans.Add(new C_transacciones { numero_tarjeta = item.numero_tarjeta, tipo_transaccion = "Deposito", monto_transacciones = monto, balance_anterio = item.saldo, balance_nuevo = item.saldo = item.saldo + monto });
+                                
+                                Console.WriteLine("======================================");
+                                Console.WriteLine("Nuevo balance : "+item.saldo);
+                                Console.ReadKey();
+                                Menu();
+                                
+>>>>>>> Angel
                                 break;
                             case "N":
                                 Console.WriteLine("VOLVIENDO AL MENU . . .");
@@ -358,6 +382,28 @@ namespace ITLA_ATM
                         break;
                 }
 
+            }
+               catch (Exception ex)
+            {
+                Console.WriteLine("Error, volviendo al menu . . .");
+                Console.ReadKey();
+                Menu();
+            }
+        }//Aqui agragamos saldo
+
+        public static void log_trans() //Log de trans
+        {
+            try
+            {
+                Console.WriteLine("LOG DE TRANSACCIONES \nDigite el # de tarjeta");
+                string tarjeta = Console.ReadLine();
+                foreach (var item in LOGIN.log_trans)
+                {
+                    if(item.numero_tarjeta == tarjeta)//Aqui buscamos segun la tarjeta
+                    {
+                        Console.WriteLine("Nombre : ");
+                    }
+                }
             }
                catch (Exception ex)
             {
