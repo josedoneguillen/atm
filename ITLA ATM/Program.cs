@@ -11,7 +11,7 @@ namespace ITLA_ATM
 
         static void Main(string[] args)
         {
-
+            Console.Clear();
             usuario.Add(new C_usuarios { numero_tarjeta = "123456", nombre = "Angel", apellido = "Lopez", contra = "Pedro809", saldo = 3000, isadmin = true });
             usuario.Add(new C_usuarios { numero_tarjeta = "1234567", nombre = "Angel", apellido = "Lopez", contra = "papirata", saldo = 4000 });
             //Aqui arriba estan algunos usuarios de prueba
