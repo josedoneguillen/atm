@@ -318,8 +318,12 @@ namespace ITLA_ATM
                         switch (a)
                         {
                             case "S":
-                                //Aqui va lo que pasa si el cliente es correcto
-                                break;
+                                Console.WriteLine("balance actual : " + item.saldo);
+                                Console.WriteLine("Ingrese el monto a depositar");
+                                double monto = Convert.ToDouble(Console.ReadLine());
+                                Console.WriteLine();//estoy trabajando con los balances
+                                item.saldo = item.saldo + monto;
+                                Console.Clear(); break;
                             case "N":
                                 Console.WriteLine("VOLVIENDO AL MENU . . .");
                                 Console.ReadKey();
