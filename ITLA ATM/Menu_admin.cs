@@ -21,7 +21,11 @@ namespace ITLA_ATM
             volver_intentar=1,
             volver_menu
         }
-        
+        enum reiniciar_contrasena
+        {
+            reiniciar =1,
+            cliente_incorrecto
+        }
         public static void Menu()
         {
             try {
@@ -184,6 +188,7 @@ namespace ITLA_ATM
         public static void eliminar_cliente()//Eliminar cliente
         {
             try {
+                Console.Clear();
                 Console.WriteLine("ELIMINAR CLIENTE \nDigite el # de tarjeta");
                 string tarjeta = Console.ReadLine();
                 int contador = 0;
@@ -229,7 +234,136 @@ namespace ITLA_ATM
             }
             
         }
+        public static void reiniciar_contra()//Aqui reiniciamos la contraseña
+        {
+            try
+            {
+                Console.Clear();
+                Console.WriteLine("REINICIAR CONTRASEÑA \nDigite el # de tarjeta del cliente");
+                string tarjeta = Console.ReadLine();
+                foreach (var item in LOGIN.usuario)//aqui recorremos todas las terjeta a ver si encontramos la que queremo
+                {
+                    if (item.numero_tarjeta == tarjeta)
+                    {
+                        Console.WriteLine("Nomber : "+item.nombre+" Apellido : "+item.apellido);
+                        Console.WriteLine("Este es el cliente correcto? S/N");
+                        string a = Console.ReadLine();
+                        switch (a)//Aqui le confirmamos al cliente si los datos cainciden con el cliente que busca
+                        {
+                            case "S"://si es correcto, cambiamos la contrasena
+                                Console.WriteLine("Digite la nueva contraseña");
+                                string nueva_contra = Console.ReadLine();
+                                item.contra = nueva_contra;
+                                Console.WriteLine("CONTRASEÑA CONFIGURADA");
+                                Menu();
+                                break;
+                            case "N"://si no es correcto volvemos al menu
+                                Console.WriteLine("VOLVIENDO AL MENU . . .");
+                                Console.ReadKey();
+                                Menu();
+                                break;
+                            default:
+                                Console.WriteLine("OPCION INVALIDA");
+                                Console.WriteLine("VOLVIENDO AL MENU . . .");
+                                Console.ReadKey();
+                                Menu();
+                                break;
+                        }
+                    }
+                }
+                //Si no encontramos coincidencia, entonces salimos del bucle y preguntamos lo siguiente
+                Console.WriteLine("# de tarjeta no ha sido encontrado \nDesea realizar otra busqueda? S/N");
+                string aa = Console.ReadLine();
+                switch (aa)
+                {
+                    case "S":
+                        reiniciar_contra();
+                        break;
+                    case "N":
 
+                        Console.WriteLine("VOLVIENDO AL MENU . . .");
+                        Console.ReadKey();
+                        Menu();
+                        break;
+                    default:
+                        Console.WriteLine("OPCION INVALIDA");
+                        Console.WriteLine("VOLVIENDO AL MENU . . .");
+                        Console.ReadKey();
+                        Menu();
+                        break;
+                }
+            }
+               catch (Exception ex)
+            {
+                Console.WriteLine("Error, volviendo al menu . . .");
+                Console.ReadKey();
+                Menu();
+            }
+        }
+
+        public static void agregar_saldo()
+        {
+            try
+            {
+                Console.Clear();
+                Console.WriteLine("AGREGAR SALDO \nDigite el # de tarjeta");
+                string tarjeta = Console.ReadLine();
+                foreach (var item in LOGIN.usuario)
+                {
+                    if(item.numero_tarjeta == tarjeta)
+                    {
+                        Console.WriteLine("Nombre : " + item.nombre + " Apellido : " + item.apellido);
+                        Console.WriteLine("Cliente corrento? S/N");
+                        string a = Console.ReadLine();
+                        switch (a)
+                        {
+                            case "S":
+                                Console.WriteLine("balance actual : " + item.saldo);
+                                Console.WriteLine("Ingrese el monto a depositar");
+                                double monto = Convert.ToDouble(Console.ReadLine());
+                                Console.WriteLine();//estoy trabajando con los balances
+                                item.saldo = item.saldo + monto;
+                                Console.Clear();
+                                
+                                break;
+                            case "N":
+                                Console.WriteLine("VOLVIENDO AL MENU . . .");
+                                Console.ReadKey();
+                                Menu();
+                                break;
+                        }
+                    }
+                }
+                //Si no encontramos coincidencia, entonces salimos del bucle y preguntamos lo siguiente
+                Console.WriteLine("# de tarjeta no ha sido encontrado \nDesea realizar otra busqueda? S/N");
+                string aa = Console.ReadLine();
+                switch (aa)
+                {
+                    case "S":
+                        reiniciar_contra();
+                        break;
+                    case "N":
+
+                        Console.WriteLine("VOLVIENDO AL MENU . . .");
+                        Console.ReadKey();
+                        Menu();
+                        break;
+                    default:
+                        Console.WriteLine("OPCION INVALIDA");
+                        Console.WriteLine("VOLVIENDO AL MENU . . .");
+                        Console.ReadKey();
+                        Menu();
+                        break;
+                }
+
+            }
+               catch (Exception ex)
+            {
+                Console.WriteLine("Error, volviendo al menu . . .");
+                Console.ReadKey();
+                Menu();
+            }
+        }
     }
 }
 
