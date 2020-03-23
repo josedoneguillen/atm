@@ -73,7 +73,8 @@ namespace ITLA_ATM
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Dato erroneo");
+                Console.WriteLine("Error, volviendo al menu . . .");
+                Menu();
             }
         }
     }
