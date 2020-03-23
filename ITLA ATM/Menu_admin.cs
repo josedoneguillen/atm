@@ -323,18 +323,7 @@ namespace ITLA_ATM
                         string a = Console.ReadLine();
                         switch (a)
                         {
-<<<<<<< HEAD
-                            case "S":
 
-                                Console.WriteLine("balance actual : " + item.saldo);
-                                Console.WriteLine("Ingrese el monto a depositar");
-                                double monto = Convert.ToDouble(Console.ReadLine());
-                                Console.WriteLine();//estoy trabajando con los balances
-                                item.saldo = item.saldo + monto;
-                                Console.Clear();
-                                
-
-=======
                             case "S": //Aqui es donde se procesa la transaccion
                                 Console.WriteLine("balance actual : " + item.saldo);
                                 Console.WriteLine("Ingrese el monto a depositar");
@@ -350,7 +339,7 @@ namespace ITLA_ATM
                                 Console.ReadKey();
                                 Menu();
                                 
->>>>>>> Angel
+
                                 break;
                             case "N":
                                 Console.WriteLine("VOLVIENDO AL MENU . . .");
