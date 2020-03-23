@@ -26,14 +26,16 @@ namespace ITLA_ATM
             reiniciar =1,
             cliente_incorrecto
         }
+        public static int numero_de_trans = 0;
         public static void Menu()
         {
             try {
+                int opcion = 0;
                 Console.Clear();
                 Console.WriteLine("MENU DEL ADMINISTRADOR");
                 Console.WriteLine("Elija una opcion \n1-Agregar cliente \n2-Editar cliente \n3-Eliminar cliente \n4-Reiniciar contraseña \n5-Agregar Saldo");
                 Console.WriteLine("6-Log de trasnacciones \n7-Configuracion del ATM \n8-Administrar usuarios \n9-Reactivacion de usuario \n10-Cerrar sesion");
-                int opcion = Convert.ToInt32(Console.ReadLine());
+                opcion = Convert.ToInt32(Console.ReadLine());
                 switch (opcion)
                 {
                     case (int)menu_admin.agregar_cli:
@@ -52,6 +54,7 @@ namespace ITLA_ATM
                         agregar_saldo();
                         break;
                     case (int)menu_admin.log_trans:
+                        log_trans();
                         break;
                     case (int)menu_admin.configurar_atm:
                         break;
@@ -307,8 +310,9 @@ namespace ITLA_ATM
             }
         }
 
-        public static void agregar_saldo()
+        public static void agregar_saldo()//Aqui agragamos saldo
         {
+            
             try
             {
                 Console.Clear();
@@ -323,8 +327,14 @@ namespace ITLA_ATM
                         string a = Console.ReadLine();
                         switch (a)
                         {
+<<<<<<< HEAD
 
+=======
+                            
+>>>>>>> Angel
                             case "S": //Aqui es donde se procesa la transaccion
+                                
+                                numero_de_trans++; 
                                 Console.WriteLine("balance actual : " + item.saldo);
                                 Console.WriteLine("Ingrese el monto a depositar");
                                 double monto = Convert.ToDouble(Console.ReadLine());
@@ -332,7 +342,7 @@ namespace ITLA_ATM
                                 Console.WriteLine("Nombre : "+item.nombre+" Apellido : "+item.apellido);
                                 Console.WriteLine("Deposito : "+monto+"\nBalance anterior :"+item.saldo);
                                 //Aqui debajo es donde se realiza el registro de todas las transacciones utilizando la clase de transacciones
-                                LOGIN.log_trans.Add(new C_transacciones { numero_tarjeta = item.numero_tarjeta, tipo_transaccion = "Deposito", monto_transacciones = monto, balance_anterio = item.saldo, balance_nuevo = item.saldo = item.saldo + monto });
+                                LOGIN.log_trans.Add(new C_transacciones { numero_transacciones = numero_de_trans , numero_tarjeta = item.numero_tarjeta, tipo_transaccion = "Deposito", monto_transacciones = monto, balance_anterio = item.saldo, balance_nuevo = item.saldo = item.saldo + monto }) ;
                                 
                                 Console.WriteLine("======================================");
                                 Console.WriteLine("Nuevo balance : "+item.saldo);
@@ -378,22 +388,46 @@ namespace ITLA_ATM
                 Console.ReadKey();
                 Menu();
             }
-        }//Aqui agragamos saldo
+        }
 
         public static void log_trans() //Log de trans
         {
             try
             {
+                Console.Clear();
                 Console.WriteLine("LOG DE TRANSACCIONES \nDigite el # de tarjeta");
                 string tarjeta = Console.ReadLine();
                 foreach (var item in LOGIN.log_trans)
                 {
                     if(item.numero_tarjeta == tarjeta)//Aqui buscamos segun la tarjeta
                     {
-                        Console.WriteLine("Nombre : ");
+                        Console.WriteLine("# de transaccion : "+item.numero_transacciones+"\n=========================\nCantidad depositada : "+item.monto_transacciones);
+                        Console.WriteLine("Balance anterior : "+item.balance_anterio+" Nuevo balance : "+item.balance_nuevo+ "\n=========================");
                     }
                 }
+                Console.WriteLine("# de tarjeta no ha sido encontrado \nDesea realizar otra busqueda? S/N");
+                string aa = Console.ReadLine();
+                switch (aa)
+                {
+                    case "S":
+                        log_trans();
+                        break;
+                    case "N":
+
+                        Console.WriteLine("VOLVIENDO AL MENU . . .");
+                        Console.ReadKey();
+                        Menu();
+                        break;
+                    default:
+                        Console.WriteLine("OPCION INVALIDA");
+                        Console.WriteLine("VOLVIENDO AL MENU . . .");
+                        Console.ReadKey();
+                        Menu();
+                        break;
+                }
+
             }
+
                catch (Exception ex)
             {
                 Console.WriteLine("Error, volviendo al menu . . .");
