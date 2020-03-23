@@ -327,11 +327,7 @@ namespace ITLA_ATM
                         string a = Console.ReadLine();
                         switch (a)
                         {
-<<<<<<< HEAD
 
-=======
-                            
->>>>>>> Angel
                             case "S": //Aqui es donde se procesa la transaccion
                                 
                                 numero_de_trans++; 
@@ -401,7 +397,7 @@ namespace ITLA_ATM
                 {
                     if(item.numero_tarjeta == tarjeta)//Aqui buscamos segun la tarjeta
                     {
-                        Console.WriteLine("# de transaccion : "+item.numero_transacciones+"\n=========================\nCantidad depositada : "+item.monto_transacciones);
+                        Console.WriteLine("Tipo de transaccion : "+item.tipo_transaccion+"\n# de transaccion : "+item.numero_transacciones+"\n=========================\nCantidad depositada : "+item.monto_transacciones);
                         Console.WriteLine("Balance anterior : "+item.balance_anterio+" Nuevo balance : "+item.balance_nuevo+ "\n=========================");
                     }
                 }
