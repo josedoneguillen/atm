@@ -7,7 +7,7 @@ namespace ITLA_ATM
     class LOGIN
     {
         public static List<C_usuarios> usuario = new List<C_usuarios>(); // este list tiene los datos de los usuarios
-        
+        public static List<C_transacciones> log_trans = new List<C_transacciones>();
 
         static void Main(string[] args)
         {
