@@ -4,15 +4,15 @@ using System.Collections.Generic;
 namespace ITLA_ATM
 {
 
-    class Program
+    class LOGIN
     {
         public static List<C_usuarios> usuario = new List<C_usuarios>(); // este list tiene los datos de los usuarios
-
+        
 
         static void Main(string[] args)
         {
             Console.Clear();
-            usuario.Add(new C_usuarios { numero_tarjeta = "123456", nombre = "Angel", apellido = "Lopez", contra = "Pedro809", saldo = 3000, isadmin = true });
+            usuario. Add(new C_usuarios { numero_tarjeta = "123456", nombre = "Angel", apellido = "Lopez", contra = "Pedro809", saldo = 3000, isadmin = true });
             usuario.Add(new C_usuarios { numero_tarjeta = "1234567", nombre = "Angel", apellido = "Lopez", contra = "papirata", saldo = 4000 });
             //Aqui arriba estan algunos usuarios de prueba
 
