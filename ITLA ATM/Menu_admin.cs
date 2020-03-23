@@ -47,7 +47,7 @@ namespace ITLA_ATM
                 case (int)menu_admin.reactivar_usuarios:
                     break;
                 case (int)menu_admin.cerrar_sesion:
-                    Program.Menu();
+                    LOGIN.Menu();
                     break;
             }
             Console.ReadKey();
@@ -63,7 +63,7 @@ namespace ITLA_ATM
                 Console.WriteLine("La numeracion de la tarjeta no es correcta, vuelva a intentarlo");
                 tarjeta = Console.ReadLine();
             }
-            foreach(var item in Program.usuario)
+            foreach(var item in LOGIN.usuario)
             {
                 if(item.numero_tarjeta == tarjeta)
                 {
@@ -102,7 +102,7 @@ namespace ITLA_ATM
             clientes.apellido = apellido;
             clientes.contra = contra;
             clientes.saldo = saldo_ini;
-            Program.usuario.Add(clientes);//Aqui llenamos el list con los datos que estas almacenados en el objeto del tipo de la clase usuarios
+            LOGIN.usuario.Add(clientes);//Aqui llenamos el list con los datos que estas almacenados en el objeto del tipo de la clase usuarios
             Console.WriteLine("\nCliente agregado con exito!!!");
             Console.ReadKey();
             Menu();
