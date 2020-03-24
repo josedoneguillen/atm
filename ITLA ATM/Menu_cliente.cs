@@ -8,7 +8,7 @@ namespace ITLA_ATM
     {
         public static void Menu()
         {
-            Console.WriteLine("Menu cliente");
+            Console.WriteLine("MENU CLIENTE");
             Console.ReadKey();
         }
     }

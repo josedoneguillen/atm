@@ -6,9 +6,12 @@ namespace ITLA_ATM
 {
     class C_transacciones
     {
+        public string nombre_banco { get; set; }
         public int numero_transacciones { get; set; }
         public string numero_tarjeta { get; set; }
         public string tipo_transaccion { get; set; }
+
+        public string fecha_trans { get; set; }
         public double monto_transacciones { get; set; }
 
         public double balance_anterio { get; set; }

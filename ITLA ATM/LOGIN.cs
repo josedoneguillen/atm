@@ -8,15 +8,17 @@ namespace ITLA_ATM
     {
         public static List<C_usuarios> usuario = new List<C_usuarios>(); // este list tiene los datos de los usuarios
         public static List<C_transacciones> log_trans = new List<C_transacciones>();
+        public static string nombre_banco = "Banco popular";
+        
 
         static void Main(string[] args)
         {
-            Console.Clear();
+            
             usuario. Add(new C_usuarios { numero_tarjeta = "123456", nombre = "Angel", apellido = "Lopez", contra = "Pedro809", saldo = 3000, isadmin = true });
             usuario.Add(new C_usuarios { numero_tarjeta = "1234567", nombre = "Angel", apellido = "Lopez", contra = "papirata", saldo = 4000 });
             //Aqui arriba estan algunos usuarios de prueba
 
-
+            
 
             Menu();
 
@@ -26,7 +28,9 @@ namespace ITLA_ATM
         {
             try
             {
-                Console.WriteLine("ATM");
+                Console.Clear();
+                Console.WriteLine("ATM "+nombre_banco.ToUpper());
+                
                 Console.WriteLine("INGRESE SU NUMERO DE TARJETA");
                 string tarjeta = Console.ReadLine();
                 foreach (var item in usuario)
