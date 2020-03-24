@@ -57,6 +57,7 @@ namespace ITLA_ATM
                         log_trans();
                         break;
                     case (int)menu_admin.configurar_atm:
+                        
                         break;
                     case (int)menu_admin.administrar_usuarios:
                         break;
@@ -315,6 +316,7 @@ namespace ITLA_ATM
             
             try
             {
+                DateTime fecha = DateTime.Now;
                 Console.Clear();
                 Console.WriteLine("AGREGAR SALDO \nDigite el # de tarjeta");
                 string tarjeta = Console.ReadLine();
@@ -338,7 +340,7 @@ namespace ITLA_ATM
                                 Console.WriteLine("Nombre : "+item.nombre+" Apellido : "+item.apellido);
                                 Console.WriteLine("Deposito : "+monto+"\nBalance anterior :"+item.saldo);
                                 //Aqui debajo es donde se realiza el registro de todas las transacciones utilizando la clase de transacciones
-                                LOGIN.log_trans.Add(new C_transacciones { numero_transacciones = numero_de_trans , numero_tarjeta = item.numero_tarjeta, tipo_transaccion = "Deposito", monto_transacciones = monto, balance_anterio = item.saldo, balance_nuevo = item.saldo = item.saldo + monto }) ;
+                                LOGIN.log_trans.Add(new C_transacciones {nombre_banco = LOGIN.nombre_banco.ToUpper(), fecha_trans = Convert.ToString(fecha) ,numero_transacciones = numero_de_trans , numero_tarjeta = item.numero_tarjeta, tipo_transaccion = "Deposito", monto_transacciones = monto, balance_anterio = item.saldo, balance_nuevo = item.saldo = item.saldo + monto }) ;
                                 
                                 Console.WriteLine("======================================");
                                 Console.WriteLine("Nuevo balance : "+item.saldo);
@@ -389,6 +391,7 @@ namespace ITLA_ATM
         {
             try
             {
+                
                 Console.Clear();
                 Console.WriteLine("LOG DE TRANSACCIONES \nDigite el # de tarjeta");
                 string tarjeta = Console.ReadLine();
@@ -396,10 +399,14 @@ namespace ITLA_ATM
                 {
                     if(item.numero_tarjeta == tarjeta)//Aqui buscamos segun la tarjeta
                     {
-                        Console.WriteLine("Tipo de transaccion : "+item.tipo_transaccion+"\n# de transaccion : "+item.numero_transacciones+"\n=========================\nCantidad depositada : "+item.monto_transacciones);
+                        Console.WriteLine("*"+LOGIN.nombre_banco.ToUpper()+"*"+"\nTipo de transaccion : "+item.tipo_transaccion+"  Fecha  "+item.fecha_trans+"\n# de transaccion : "+item.numero_transacciones+"\n=========================\nCantidad depositada : "+item.monto_transacciones);
                         Console.WriteLine("Balance anterior : "+item.balance_anterio+" Nuevo balance : "+item.balance_nuevo+ "\n=========================");
+
+                        Console.ReadKey();
+                        Menu();
                     }
                 }
+                
                 Console.WriteLine("# de tarjeta no ha sido encontrado \nDesea realizar otra busqueda? S/N");
                 string aa = Console.ReadLine();
                 switch (aa)
@@ -420,12 +427,81 @@ namespace ITLA_ATM
                         Menu();
                         break;
                 }
+                
 
             }
 
                catch (Exception ex)
             {
                 Console.WriteLine("Error, volviendo al menu . . .");
+                Console.ReadKey();
+                Menu();
+            }
+        }
+
+        public static void cambiar_nombre_banco()//ESTA OPCION SERA AÑADIDA A LAS CONFIGURACIONES DEL ATM
+        {
+            try { 
+            Console.Clear();
+            Console.WriteLine("Esta seguro que desea cambiar el nombre del banco? S/N");
+            string a = Console.ReadLine();
+            switch (a)
+            {
+                case "S":
+                    Console.WriteLine("ingrese el nuevo nombre del banco");
+                    string nombre = Console.ReadLine();
+                    LOGIN.nombre_banco = nombre;
+                    Console.WriteLine("EL NUEVO NOMBRE DEL BANCO ES :" + LOGIN.nombre_banco);
+                    Console.ReadKey();
+                    Menu();//Se supone que vuelva al menu de configuraciones, no al menu principal
+                    break;
+                case "N":
+                    Console.WriteLine("VOLVIENDO AL MENU . . .");
+                    Console.ReadKey();
+                    Menu();
+                    break;
+                default:
+                    Console.WriteLine("OPCION INVALIDA");
+                    Console.WriteLine("VOLVIENDO AL MENU . . .");
+                    Console.ReadKey();
+                    Menu();
+                    break;
+            }
+        }
+              catch (Exception ex)
+            {
+                Console.WriteLine("Error, volviendo al menu . . .");
+                Console.ReadKey();
+                Menu();
+            }
+
+        }
+
+        public static void papeletas_200_1000()//AQUI ESTAMOS TRATANDO DE CONFIGURAR COMO SOLTAR LOS BILLETES DEL CAJERO
+        {
+            try
+            {
+                int retiro = 0, prueba, multiplo;
+
+                prueba = retiro % 1000;
+                if (prueba == 0 || prueba == 200 || prueba == 400 || prueba == 600 || prueba == 800)//Aqui decimos que si el reciduo de lo que esta arriba es uno de esos resultadod
+                                                                                                    //es porque es un multiplo de mil y tiene tambien un multiplo de 200, asi que podemos procesar el cobro
+                {
+                    multiplo = retiro / 1000;
+                    multiplo = multiplo * 1000;
+                    retiro = retiro - multiplo;
+                    retiro = retiro - retiro;
+                    Console.WriteLine(retiro);
+                }
+                else if (retiro % 200 == 0) //Aqui decimos que si es un multiplo de 200 entonces el residuo sera 0 por lo cual podremos dispensar de a billites de 200
+                {
+                    retiro = retiro - retiro;
+                    Console.WriteLine(retiro);
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Error \nVOLVIENDO AL MENU . . .");
                 Console.ReadKey();
                 Menu();
             }
