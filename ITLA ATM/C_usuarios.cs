@@ -12,7 +12,8 @@ namespace ITLA_ATM
             public string contra{get; set;}
         public double saldo { get; set; }
         public bool isadmin { get; set; }
-        public void C_usuario(string tarjeta, string nomb, string apell, string cont,double sal, bool admin=false )
+        public bool isactive { get; set; }
+        public void C_usuario(string tarjeta, string nomb, string apell, string cont,double sal, bool admin=false, bool acti = true )
         {
             numero_tarjeta = tarjeta;
             nombre = nomb;
