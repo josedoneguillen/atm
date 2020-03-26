@@ -42,6 +42,7 @@ namespace ITLA_ATM
             try {
                 int opcion = 0;
                 Console.Clear();
+                Console.WriteLine("Bienvenido, " + LOGIN.usuario[LOGIN.usuario_en_uso].nombre + " " + LOGIN.usuario[LOGIN.usuario_en_uso].apellido);
                 Console.WriteLine("MENU DEL ADMINISTRADOR");
                 Console.WriteLine("Elija una opcion \n1-Agregar cliente \n2-Editar cliente \n3-Eliminar cliente \n4-Reiniciar contraseña \n5-Agregar Saldo");
                 Console.WriteLine("6-Log de trasnacciones \n7-Configuracion del ATM \n8-Administrar usuarios \n9-Reactivacion de usuario \n10-Cerrar sesion");
@@ -613,7 +614,7 @@ namespace ITLA_ATM
                 Console.WriteLine("EDITAR ADMIN");
                 Console.WriteLine("\nDigite el # de tarjeta");
                 string tarjeta = Console.ReadLine();
-                if(tarjeta == LOGIN.usuario_en_uso)
+                if(tarjeta == LOGIN.usuario[LOGIN.usuario_en_uso].numero_tarjeta)
                 {
                     Console.WriteLine("UN ADMIN NO PUEDE EDITARSE A SI MISMO \nVOLVIENDO AL MENU . . .");
                     administrar_usuario();
@@ -705,7 +706,7 @@ namespace ITLA_ATM
                 Console.Clear();
                 Console.WriteLine("ELIMINAR USUARIO ADMIN \nDigite el # de tarjeta");
                 string tarjeta = Console.ReadLine();
-                if(tarjeta == LOGIN.usuario_en_uso)
+                if(tarjeta == LOGIN.usuario[LOGIN.usuario_en_uso].numero_tarjeta)
                 {
                     Console.WriteLine("UN USUARIO NO PUEDE ELIMINARSE EL MISMO \nVOLVIENDO AL MENU . . .");
                     Console.ReadKey();

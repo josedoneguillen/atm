@@ -9,7 +9,7 @@ namespace ITLA_ATM
         public static List<C_usuarios> usuario = new List<C_usuarios>(); // este list tiene los datos de los usuarios
         public static List<C_transacciones> log_trans = new List<C_transacciones>();
         public static string nombre_banco = "Banco popular";
-        public static string usuario_en_uso; //Esta variable se va a utilizar para saber cual es el usuario que esta en uso
+        public static int usuario_en_uso; //Esta variable se va a utilizar para saber cual es el usuario que esta en uso
         //con esta validaremos que el admin no realice ningun cambio a el mismo
         public static int intentos = 0;
 
@@ -36,7 +36,8 @@ namespace ITLA_ATM
                 
                 Console.WriteLine("INGRESE SU NUMERO DE TARJETA");
                 string tarjeta = Console.ReadLine();
-                usuario_en_uso = tarjeta;
+                usuario_en_uso = 0;
+
                 foreach (var item in usuario)
                 {
                     if (item.numero_tarjeta == tarjeta)//Aqui validamos las tarjetas existentes, con las que tenemos en el sistema
@@ -51,6 +52,8 @@ namespace ITLA_ATM
                                 Console.ReadKey();
                                 Console.Clear();
                                 Menu_admin.Menu();
+
+                                break;
                             }
                             else if (item.isadmin == false)//si es un cliente se ira al menu de clientes
                             {
@@ -60,6 +63,8 @@ namespace ITLA_ATM
                                     Console.ReadKey();
                                     Console.Clear();
                                     Menu_cliente.Menu();
+
+                                    break;
                                 }
                                 else
                                 {
@@ -91,7 +96,10 @@ namespace ITLA_ATM
                             }
                         }
                     }
-                    
+
+                    usuario_en_uso++;
+
+
                 }
                 Console.WriteLine("# DE TARJETA INVALIDO");
                 Console.ReadKey();
