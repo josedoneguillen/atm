@@ -53,7 +53,7 @@ namespace ITLA_ATM
                         break;
 
                     case (int)MenuClientEnum.DEPOSITAR:
-                        
+                        DepositarEfectivo();
                         break;
 
                     case (int)MenuClientEnum.COMPRAR_TARJETA:
@@ -198,6 +198,33 @@ namespace ITLA_ATM
         {
             // Imprimir balance disponible por el cliente
             Console.WriteLine("Su balance es de RD$ " + LOGIN.usuario[LOGIN.usuario_en_uso].saldo);
+        }
+
+        // Metodo para ver balance del cliente
+        public static void DepositarEfectivo()
+        {
+            // Solicitar al cliente la cantidad que desea depositar
+            Console.WriteLine("Ingrese la cantidad que desea depositar: ");
+
+            //Uso de try catch para evitar errores
+            try
+            {
+                double cant = Convert.ToDouble(Console.ReadLine());
+
+                // Aumentar cantidad al saldo del cliente
+                LOGIN.usuario[LOGIN.usuario_en_uso].saldo += cant;
+
+                //Mostrar mensaje de deposito exitoso y saldo actual
+                Console.WriteLine("El deposito fue exitoso");
+                ConsultarBalance();
+
+            }
+            catch (Exception e) {
+                Console.WriteLine(e.Message + "VOLVIENDO AL MENU...");
+                MenuCliente();
+            }
+
+            
         }
     }
 }
