@@ -6,6 +6,16 @@ namespace ITLA_ATM
 {
     class ATM
     {
+        /* Declaracion de enum para menu de cliente */
+        enum MenuClientEnum
+        {
+            RETIRAR = 1,
+            DEPOSITAR,
+            COMPRAR_TARJETA,
+            CONSULTAR_BALANCE,
+            SALIR
+        }
+
         /* Declaracion de enum para menu de configuracion */
         enum MenuConfigEnum
         {
@@ -14,6 +24,63 @@ namespace ITLA_ATM
             VOLVER
         }
 
+        /* Declaracion de estructura de denominaciones */
+
+        public struct Denominacion {
+            public int denominacion { get; set; }
+            public int cantidad { get; set; }
+        }
+
+        /* Declaracion de lista de denominaciones */
+        public static List<Denominacion> Denominaciones = new List<Denominacion>();
+
+        /* Metodo para desplegar menu de cliente */
+        public static void MenuCliente()
+        {
+
+            try
+            {
+                int opcion = 0;
+                Console.Clear();
+                Console.WriteLine("Bienvenido, " + LOGIN.usuario[LOGIN.usuario_en_uso].nombre + " " + LOGIN.usuario[LOGIN.usuario_en_uso].apellido);
+                Console.WriteLine("MENU DE CONFIGURACION DE ATM");
+                Console.WriteLine("Elija una opcion \n1-Cambiar nombre del banco \n2-Cambiar modo de dispensacion  \n3-Volver");
+                opcion = Convert.ToInt32(Console.ReadLine());
+                switch (opcion)
+                {
+                    case (int)MenuClientEnum.RETIRAR:
+                        
+                        break;
+
+                    case (int)MenuClientEnum.DEPOSITAR:
+                        
+                        break;
+
+                    case (int)MenuClientEnum.COMPRAR_TARJETA:
+                        
+                        break;
+
+                    case (int)MenuClientEnum.CONSULTAR_BALANCE:
+                        
+                        break;
+
+                    case (int)MenuClientEnum.SALIR:
+                        LOGIN.Menu();
+                        break;
+                    default:
+                        Console.WriteLine("Opcion invalida \nVOLVIENDO AL MENU . . .");
+                        MenuConfig();
+                        break;
+                }
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message + "\nvolviendo al menu . . .");
+                Console.ReadKey();
+                MenuCliente();
+            }
+        }
 
         /* Metodo para desplegar menu de configuracion */
         public static void MenuConfig() 
@@ -38,7 +105,7 @@ namespace ITLA_ATM
                         break;
 
                     case (int)MenuConfigEnum.VOLVER:
-
+                        LOGIN.Menu();
                         break;
                     default:
                             Console.WriteLine("Opcion invalida \nVOLVIENDO AL MENU . . .");
@@ -117,11 +184,11 @@ namespace ITLA_ATM
                     Console.WriteLine(retiro);
                 }
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                Console.WriteLine("Error \nVOLVIENDO AL MENU . . .");
+                Console.WriteLine(e.Message + "\nVOLVIENDO AL MENU . . .");
                 Console.ReadKey();
-                Menu_admin.Menu();
+                MenuConfig();
             }
         }
 
