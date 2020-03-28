@@ -13,6 +13,7 @@ namespace ITLA_ATM
             DEPOSITAR,
             COMPRAR_TARJETA,
             CONSULTAR_BALANCE,
+            TRANSACCIONES,
             SALIR
         }
 
@@ -50,7 +51,7 @@ namespace ITLA_ATM
                 Console.Clear();
                 Console.WriteLine("Bienvenido, " + LOGIN.usuario[LOGIN.usuario_en_uso].nombre + " " + LOGIN.usuario[LOGIN.usuario_en_uso].apellido);
                 Console.WriteLine("MENU DE CONFIGURACION DE ATM");
-                Console.WriteLine("Elija una opcion \n1-Retirar efectivo \n2-Depositar efectivo  \n3-Comprar tarjeta de llamada \n4-Consultar balance \n5-Salir");
+                Console.WriteLine("Elija una opcion \n1-Retirar efectivo \n2-Depositar efectivo  \n3-Comprar tarjeta de llamada \n4-Consultar balance \n5-Transacciones \n6-Salir");
                 opcion = Convert.ToInt32(Console.ReadLine());
                 switch (opcion)
                 {
@@ -68,6 +69,9 @@ namespace ITLA_ATM
 
                     case (int)MenuClientEnum.CONSULTAR_BALANCE:
                         ConsultarBalance();
+                        break;
+                    case (int)MenuClientEnum.TRANSACCIONES:
+                        log_trans();
                         break;
 
                     case (int)MenuClientEnum.SALIR:
@@ -128,6 +132,53 @@ namespace ITLA_ATM
             }
             }
 
+        public static void log_trans() //Log de trans
+        {
+            try
+            {
+                bool encontro = false; //esta variiable la usaremos para saber si se encontro un cliente con la tarjeta digitada
+                Console.Clear();
+                
+                
+                foreach (var item in LOGIN.log_trans)
+                {
+                    if (item.numero_tarjeta == LOGIN.usuario[LOGIN.usuario_en_uso].numero_tarjeta)//Aqui buscamos segun la tarjeta
+                    {
+
+                        Console.WriteLine("*" + LOGIN.nombre_banco.ToUpper() + "*" + "\nTipo de transaccion : " + item.tipo_transaccion + "  Fecha  " + item.fecha_trans + "\n# de transaccion : " + item.numero_transacciones + "\n=========================\nCantidad depositada : " + item.monto_transacciones);
+                        Console.WriteLine("Balance anterior : " + item.balance_anterio + " Nuevo balance : " + item.balance_nuevo + "\n=========================");
+
+                        encontro = true;//Aqui validamos que encontramos a un cliente
+                    }
+
+                }
+
+                if (encontro == false)
+                {
+                    Console.WriteLine("Usted aun no ha realizado ninguna transaccion \nVOLVIENDO AL MENU ANTERIOR");
+                    Console.ReadKey();
+                    MenuCliente();
+
+                }
+                else
+                {
+                    Console.ReadKey();
+                    MenuCliente();
+                }
+
+
+
+
+
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error, volviendo al menu . . .");
+                Console.ReadKey();
+                MenuCliente();
+            }
+        }
         // Metodo para cambiar nombre del banco
         public static void cambiar_nombre_banco()
         {

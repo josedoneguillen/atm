@@ -425,8 +425,34 @@ namespace ITLA_ATM
                     
                 }
 
-                Console.ReadKey();
-                Menu();
+                if(encontro == false)
+                {
+                    Console.WriteLine("# de tarjeta no ha sido encontrado \nDesea realizar otra busqueda? S/N");
+                    string aa = Console.ReadLine();
+                    switch (aa)
+                    {
+                        case "S":
+                            log_trans();
+                            break;
+                        case "N":
+
+                            Console.WriteLine("VOLVIENDO AL MENU . . .");
+                            Console.ReadKey();
+                            Menu();
+                            break;
+                        default:
+                            Console.WriteLine("OPCION INVALIDA");
+                            Console.WriteLine("VOLVIENDO AL MENU . . .");
+                            Console.ReadKey();
+                            Menu();
+                            break;
+                    }
+                }
+                else {
+                    Console.ReadKey();
+                    Menu();
+                }
+                
 
                 
                 
