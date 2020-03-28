@@ -17,7 +17,7 @@ namespace ITLA_ATM
         {
 
             // Aqui estan algunos usuarios de prueba
-            usuario. Add(new C_usuarios { numero_tarjeta = "0000-0000-0000-0000", nombre = "Angel", apellido = "Lopez", contra = "0000", saldo = 3000, isadmin = true });
+            usuario.Add(new C_usuarios { numero_tarjeta = "0000-0000-0000-0000", nombre = "Angel", apellido = "Lopez", contra = "0000", saldo = 3000, isadmin = true });
             usuario.Add(new C_usuarios { numero_tarjeta = "1111-1111-1111-1111", nombre = "José", apellido = "Doñe", contra = "0001", saldo = 4000, isactive = true });
 
             // Agregando datos a la lista de empresas de tarjetas
@@ -31,6 +31,12 @@ namespace ITLA_ATM
             ATM.MontosTarjetas.Add(150);
             ATM.MontosTarjetas.Add(200);
             ATM.MontosTarjetas.Add(250);
+
+            // Agregando denominaciones de billetes y sus cantidades
+            ATM.Denominaciones.Add( new ATM.Denominacion { denominacion = 100, cantidad = 1000 } );
+            ATM.Denominaciones.Add( new ATM.Denominacion { denominacion = 200, cantidad = 1000 } );
+            ATM.Denominaciones.Add( new ATM.Denominacion { denominacion = 500, cantidad = 1000 } );
+            ATM.Denominaciones.Add( new ATM.Denominacion { denominacion = 1000, cantidad = 1000 } );
 
 
             Menu();

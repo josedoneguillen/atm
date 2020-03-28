@@ -55,7 +55,7 @@ namespace ITLA_ATM
                 switch (opcion)
                 {
                     case (int)MenuClientEnum.RETIRAR:
-                        
+                        RetiroEfectivo();
                         break;
 
                     case (int)MenuClientEnum.DEPOSITAR:
@@ -167,9 +167,13 @@ namespace ITLA_ATM
             }
 
         }
-       
+
         //Metodo para cambiar dispensacion de billetes
-        public static void papeletas_200_1000()
+        public static void papeletas_200_1000() 
+        {
+        }
+        //Metodo para cambiar retirar efectivo
+        public static void RetiroEfectivo()
         {
             try
             {
