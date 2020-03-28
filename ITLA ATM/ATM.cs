@@ -44,7 +44,7 @@ namespace ITLA_ATM
                 Console.Clear();
                 Console.WriteLine("Bienvenido, " + LOGIN.usuario[LOGIN.usuario_en_uso].nombre + " " + LOGIN.usuario[LOGIN.usuario_en_uso].apellido);
                 Console.WriteLine("MENU DE CONFIGURACION DE ATM");
-                Console.WriteLine("Elija una opcion \n1-Cambiar nombre del banco \n2-Cambiar modo de dispensacion  \n3-Volver");
+                Console.WriteLine("Elija una opcion \n1-Retirar efectivo \n2-Depositar efectivo  \n3-Comprar tarjeta de llamada \n4-Consultar balance \n5-Salir");
                 opcion = Convert.ToInt32(Console.ReadLine());
                 switch (opcion)
                 {
@@ -61,7 +61,7 @@ namespace ITLA_ATM
                         break;
 
                     case (int)MenuClientEnum.CONSULTAR_BALANCE:
-                        
+                        ConsultarBalance();
                         break;
 
                     case (int)MenuClientEnum.SALIR:
@@ -114,12 +114,12 @@ namespace ITLA_ATM
                     }
                 }
 
-                catch (Exception ex)
+                catch (Exception e)
                 {
-                    Console.WriteLine("Error, volviendo al menu . . .");
-                    Console.ReadKey();
-                    Menu_admin.Menu();
-                }
+                Console.WriteLine(e.Message + "\nVOLVIENDO AL MENU . . .");
+                Console.ReadKey();
+                MenuConfig();
+            }
             }
 
         // Metodo para cambiar nombre del banco
@@ -138,31 +138,32 @@ namespace ITLA_ATM
                         LOGIN.nombre_banco = nombre;
                         Console.WriteLine("EL NUEVO NOMBRE DEL BANCO ES :" + LOGIN.nombre_banco);
                         Console.ReadKey();
-                        Menu_admin.Menu();//Se supone que vuelva al menu de configuraciones, no al menu principal
+                        MenuConfig();
                         break;
                     case "N":
                         Console.WriteLine("VOLVIENDO AL MENU . . .");
                         Console.ReadKey();
-                        Menu_admin.Menu();
+                        MenuConfig();
                         break;
                     default:
                         Console.WriteLine("OPCION INVALIDA");
                         Console.WriteLine("VOLVIENDO AL MENU . . .");
                         Console.ReadKey();
-                        Menu_admin.Menu();
+                        MenuConfig();
                         break;
                 }
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                Console.WriteLine("Error, volviendo al menu . . .");
+                Console.WriteLine(e.Message + "\nVOLVIENDO AL MENU . . .");
                 Console.ReadKey();
-                Menu_admin.Menu();
+                MenuConfig();
             }
 
         }
+       
         //Metodo para cambiar dispensacion de billetes
-        public static void papeletas_200_1000()//AQUI ESTAMOS TRATANDO DE CONFIGURAR COMO SOLTAR LOS BILLETES DEL CAJERO
+        public static void papeletas_200_1000()
         {
             try
             {
@@ -192,5 +193,11 @@ namespace ITLA_ATM
             }
         }
 
+        // Metodo para ver balance del cliente
+        public static void ConsultarBalance() 
+        {
+            // Imprimir balance disponible por el cliente
+            Console.WriteLine("Su balance es de RD$ " + LOGIN.usuario[LOGIN.usuario_en_uso].saldo);
+        }
     }
 }
