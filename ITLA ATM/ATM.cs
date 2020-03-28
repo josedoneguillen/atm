@@ -266,6 +266,7 @@ namespace ITLA_ATM
                 // Comprobar si la cuenta tiene suficiente como para realizar la compra
                 if (LOGIN.usuario[LOGIN.usuario_en_uso].saldo >= retiro)
                 {
+                    if (retiro >= 100) { 
                     DateTime fecha = DateTime.Now;
                     // Imprimir resultados
                     
@@ -278,9 +279,21 @@ namespace ITLA_ATM
                     
                     Console.WriteLine("Nuevo Balance:" + LOGIN.usuario[LOGIN.usuario_en_uso].saldo);
                    Menu_admin.numero_de_trans++;
-                    
-                    
+                    }
+                    else
+                    {
+                        Console.WriteLine("No se puede realizar un retiro menor de $100");
+                        Console.ReadKey();
+                        MenuCliente();
+                    }
 
+
+                }
+                else
+                {
+                    Console.WriteLine("Usted no dispode de saldo suficiente");
+                    Console.ReadKey();
+                    MenuCliente();
                 }
 
                 // Esperar para volver
@@ -316,21 +329,30 @@ namespace ITLA_ATM
             try
             {
                 double cant = Convert.ToDouble(Console.ReadLine());
-                DateTime fecha = DateTime.Now;
-                
-                //Aqui debajo es donde se realiza el registro de todas las transacciones utilizando la clase de transacciones
-                LOGIN.log_trans.Add(new C_transacciones { nombre_banco = LOGIN.nombre_banco.ToUpper(), fecha_trans = Convert.ToString(fecha), numero_transacciones = Menu_admin.numero_de_trans, numero_tarjeta = LOGIN.usuario[LOGIN.usuario_en_uso].numero_tarjeta, tipo_transaccion = "Deposito", monto_transacciones = cant, balance_anterio = LOGIN.usuario[LOGIN.usuario_en_uso].saldo, balance_nuevo = LOGIN.usuario[LOGIN.usuario_en_uso].saldo + cant});
-                Menu_admin.numero_de_trans++;
-                // Aumentar cantidad al saldo del cliente
-                LOGIN.usuario[LOGIN.usuario_en_uso].saldo += cant;
+                if (cant >= 50)
+                {
+                    DateTime fecha = DateTime.Now;
 
-                //Mostrar mensaje de deposito exitoso y saldo actual
-                Console.WriteLine("El deposito fue exitoso");
-                ConsultarBalance();
+                    //Aqui debajo es donde se realiza el registro de todas las transacciones utilizando la clase de transacciones
+                    LOGIN.log_trans.Add(new C_transacciones { nombre_banco = LOGIN.nombre_banco.ToUpper(), fecha_trans = Convert.ToString(fecha), numero_transacciones = Menu_admin.numero_de_trans, numero_tarjeta = LOGIN.usuario[LOGIN.usuario_en_uso].numero_tarjeta, tipo_transaccion = "Deposito", monto_transacciones = cant, balance_anterio = LOGIN.usuario[LOGIN.usuario_en_uso].saldo, balance_nuevo = LOGIN.usuario[LOGIN.usuario_en_uso].saldo + cant });
+                    Menu_admin.numero_de_trans++;
+                    // Aumentar cantidad al saldo del cliente
+                    LOGIN.usuario[LOGIN.usuario_en_uso].saldo += cant;
 
-                // Esperar para volver
-                Console.ReadKey();
-                MenuCliente();
+                    //Mostrar mensaje de deposito exitoso y saldo actual
+                    Console.WriteLine("El deposito fue exitoso");
+                    ConsultarBalance();
+
+                    // Esperar para volver
+                    Console.ReadKey();
+                    MenuCliente();
+                }
+                else
+                {
+                    Console.WriteLine("No se puede depositar menos de RD$50");
+                    Console.ReadKey();
+                    MenuCliente();
+                }
 
             }
             catch (Exception e) {
