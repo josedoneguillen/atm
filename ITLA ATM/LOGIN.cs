@@ -107,7 +107,7 @@ namespace ITLA_ATM
                                     Console.WriteLine(Environment.NewLine + "BIENVENIDO");
                                     Console.ReadKey();
                                     Console.Clear();
-                                    Menu_cliente.Menu();
+                                    ATM.MenuCliente();
 
                                     break;
                                 }

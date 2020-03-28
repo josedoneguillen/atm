@@ -68,7 +68,7 @@ namespace ITLA_ATM
                         log_trans();
                         break;
                     case (int)menu_admin.configurar_atm:
-                        
+                        ATM.MenuConfig();
                         break;
                     case (int)menu_admin.administrar_usuarios:
                         administrar_usuario();
