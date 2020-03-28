@@ -169,15 +169,11 @@ namespace ITLA_ATM
         }
 
         //Metodo para cambiar dispensacion de billetes
-        public static void papeletas_200_1000() 
-        {
-        }
-        //Metodo para cambiar retirar efectivo
-        public static void RetiroEfectivo()
+        public static void papeletas_200_1000(int retiro = 0) 
         {
             try
             {
-                int retiro = 0, prueba, multiplo;
+                int prueba, multiplo;
 
                 prueba = retiro % 1000;
                 if (prueba == 0 || prueba == 200 || prueba == 400 || prueba == 600 || prueba == 800)//Aqui decimos que si el reciduo de lo que esta arriba es uno de esos resultadod
@@ -201,6 +197,47 @@ namespace ITLA_ATM
                 Console.ReadKey();
                 MenuConfig();
             }
+        }
+        //Metodo para cambiar retirar efectivo
+        public static void RetiroEfectivo()
+        {
+
+
+            //Uso de try catch para evitar errores
+            try
+            {
+                // Solicitar al cliente la cantidad que desea depositar
+                Console.WriteLine("Ingrese la cantidad a retirar:");
+
+                // Almacenar la cantidad a retirar
+                int retiro = Convert.ToInt32(Console.ReadLine());
+
+                // Comprobar si la cuenta tiene suficiente como para realizar la compra
+                if (LOGIN.usuario[LOGIN.usuario_en_uso].saldo >= retiro)
+                {
+
+                    // Imprimir resultados
+                    Console.WriteLine("Monto a retirar:" + retiro);
+                    Console.WriteLine("Balance Anterior:" + LOGIN.usuario[LOGIN.usuario_en_uso].saldo);
+
+                    // Debitar cantidad del retiro de la cuenta
+                    LOGIN.usuario[LOGIN.usuario_en_uso].saldo -= retiro;
+
+                    Console.WriteLine("Nuevo Balance:" + LOGIN.usuario[LOGIN.usuario_en_uso].saldo);
+                }
+
+                // Esperar para volver
+                Console.ReadKey();
+                MenuCliente();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message + "VOLVIENDO AL MENU...");
+                Console.ReadKey();
+                MenuCliente();
+            }
+
+
         }
 
         // Metodo para ver balance del cliente
