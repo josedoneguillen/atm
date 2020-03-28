@@ -9,3 +9,14 @@ C:\Users\enman\OneDrive\Escritorio\C#\ITLA ATM\ITLA ATM\obj\Debug\netcoreapp3.1\
 C:\Users\enman\OneDrive\Escritorio\C#\ITLA ATM\ITLA ATM\obj\Debug\netcoreapp3.1\ITLA ATM.AssemblyInfo.cs
 C:\Users\enman\OneDrive\Escritorio\C#\ITLA ATM\ITLA ATM\obj\Debug\netcoreapp3.1\ITLA ATM.dll
 C:\Users\enman\OneDrive\Escritorio\C#\ITLA ATM\ITLA ATM\obj\Debug\netcoreapp3.1\ITLA ATM.pdb
+C:\Users\JDONE\source\repos\ITLA\atm\ITLA ATM\bin\Debug\netcoreapp3.1\ITLA ATM.exe
+C:\Users\JDONE\source\repos\ITLA\atm\ITLA ATM\bin\Debug\netcoreapp3.1\ITLA ATM.deps.json
+C:\Users\JDONE\source\repos\ITLA\atm\ITLA ATM\bin\Debug\netcoreapp3.1\ITLA ATM.runtimeconfig.json
+C:\Users\JDONE\source\repos\ITLA\atm\ITLA ATM\bin\Debug\netcoreapp3.1\ITLA ATM.runtimeconfig.dev.json
+C:\Users\JDONE\source\repos\ITLA\atm\ITLA ATM\bin\Debug\netcoreapp3.1\ITLA ATM.dll
+C:\Users\JDONE\source\repos\ITLA\atm\ITLA ATM\bin\Debug\netcoreapp3.1\ITLA ATM.pdb
+C:\Users\JDONE\source\repos\ITLA\atm\ITLA ATM\obj\Debug\netcoreapp3.1\ITLA ATM.csprojAssemblyReference.cache
+C:\Users\JDONE\source\repos\ITLA\atm\ITLA ATM\obj\Debug\netcoreapp3.1\ITLA ATM.AssemblyInfoInputs.cache
+C:\Users\JDONE\source\repos\ITLA\atm\ITLA ATM\obj\Debug\netcoreapp3.1\ITLA ATM.AssemblyInfo.cs
+C:\Users\JDONE\source\repos\ITLA\atm\ITLA ATM\obj\Debug\netcoreapp3.1\ITLA ATM.dll
+C:\Users\JDONE\source\repos\ITLA\atm\ITLA ATM\obj\Debug\netcoreapp3.1\ITLA ATM.pdb

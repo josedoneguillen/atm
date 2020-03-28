@@ -9,18 +9,35 @@ namespace ITLA_ATM
         public static List<C_usuarios> usuario = new List<C_usuarios>(); // este list tiene los datos de los usuarios
         public static List<C_transacciones> log_trans = new List<C_transacciones>();
         public static string nombre_banco = "Banco popular";
-        public static string usuario_en_uso; //Esta variable se va a utilizar para saber cual es el usuario que esta en uso
+        public static int usuario_en_uso; //Esta variable se va a utilizar para saber cual es el usuario que esta en uso
         //con esta validaremos que el admin no realice ningun cambio a el mismo
         public static int intentos = 0;
 
         static void Main(string[] args)
         {
-            
-            usuario. Add(new C_usuarios { numero_tarjeta = "123456", nombre = "Angel", apellido = "Lopez", contra = "Pedro809", saldo = 3000, isadmin = true });
-            usuario.Add(new C_usuarios { numero_tarjeta = "1234567", nombre = "Angel", apellido = "Lopez", contra = "papirata", saldo = 4000, isactive = true });
-            //Aqui arriba estan algunos usuarios de prueba
 
-            
+            // Aqui estan algunos usuarios de prueba
+            usuario.Add(new C_usuarios { numero_tarjeta = "0000000000000000", nombre = "Angel", apellido = "Lopez", contra = "0000", saldo = 3000, isadmin = true });
+            usuario.Add(new C_usuarios { numero_tarjeta = "1111111111111111", nombre = "José", apellido = "Doñe", contra = "0001", saldo = 4000, isactive = true });
+
+            // Agregando datos a la lista de empresas de tarjetas
+            ATM.EmpresaTarjetas.Add("Claro");
+            ATM.EmpresaTarjetas.Add("Altice");
+            ATM.EmpresaTarjetas.Add("Viva");
+
+            // Agregando datos a la lista de montos de tarjetas
+            ATM.MontosTarjetas.Add(60);
+            ATM.MontosTarjetas.Add(100);
+            ATM.MontosTarjetas.Add(150);
+            ATM.MontosTarjetas.Add(200);
+            ATM.MontosTarjetas.Add(250);
+
+            // Agregando denominaciones de billetes y sus cantidades
+            ATM.Denominaciones.Add( new ATM.Denominacion { denominacion = 100, cantidad = 1000 } );
+            ATM.Denominaciones.Add( new ATM.Denominacion { denominacion = 200, cantidad = 1000 } );
+            ATM.Denominaciones.Add( new ATM.Denominacion { denominacion = 500, cantidad = 1000 } );
+            ATM.Denominaciones.Add( new ATM.Denominacion { denominacion = 1000, cantidad = 1000 } );
+
 
             Menu();
 
@@ -34,32 +51,65 @@ namespace ITLA_ATM
                 Console.Clear();
                 Console.WriteLine("ATM "+nombre_banco.ToUpper());
                 
-                Console.WriteLine("INGRESE SU NUMERO DE TARJETA");
+                Console.WriteLine("INGRESE SU NUMERO DE TARJETA (####-####-####-####)");
                 string tarjeta = Console.ReadLine();
-                usuario_en_uso = tarjeta;
+                usuario_en_uso = 0;
+
                 foreach (var item in usuario)
                 {
                     if (item.numero_tarjeta == tarjeta)//Aqui validamos las tarjetas existentes, con las que tenemos en el sistema
                     {
                         Console.WriteLine("Digite la contraseña");
-                        string contra = Console.ReadLine();
+
+                        // variable string para almacenar contraseña
+                        string contra ="";
+
+                        // Ciclo do while paara validar cada letra
+                        do
+                        {
+                            // Usar console read key para leer letra por letra en ves de escribirla en pantalla
+                            ConsoleKeyInfo key = Console.ReadKey(true);
+
+                            // Declaracion if para no borrar y validar que letra no sea enter
+                            if (key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Enter)
+                            {
+                                /* Sumar cada letra a la variable sin escribirla en la consola */
+                                contra += key.KeyChar;
+
+                                /* Escribir un * en lugar de la letra presionada */
+                                Console.Write("*");
+
+                            }
+                            // Condicion para aceptar enter y romper en ciclo
+                            else if (key.Key == ConsoleKey.Enter)
+                            {
+                                    break;
+                            }
+                        } while (true);
+
+
+
                         if (item.contra == contra)
                         {
                             if (item.isadmin == true)//Aqui validamos si la persona es un administrador
                             {
-                                Console.WriteLine("BIENVENIDO");
+                                Console.WriteLine(Environment.NewLine + "BIENVENIDO");
                                 Console.ReadKey();
                                 Console.Clear();
                                 Menu_admin.Menu();
+
+                                break;
                             }
                             else if (item.isadmin == false)//si es un cliente se ira al menu de clientes
                             {
                                 if(item.isactive == true)
                                 {
-                                    Console.WriteLine("BIENVENIDO");
+                                    Console.WriteLine(Environment.NewLine + "BIENVENIDO");
                                     Console.ReadKey();
                                     Console.Clear();
-                                    Menu_cliente.Menu();
+                                    ATM.MenuCliente();
+
+                                    break;
                                 }
                                 else
                                 {
@@ -91,7 +141,10 @@ namespace ITLA_ATM
                             }
                         }
                     }
-                    
+
+                    usuario_en_uso++;
+
+
                 }
                 Console.WriteLine("# DE TARJETA INVALIDO");
                 Console.ReadKey();

@@ -36,12 +36,13 @@ namespace ITLA_ATM
 
         }
 
-        public static int numero_de_trans = 0;
+        public static int numero_de_trans;
         public static void Menu()
         {
             try {
                 int opcion = 0;
                 Console.Clear();
+                Console.WriteLine("Bienvenido, " + LOGIN.usuario[LOGIN.usuario_en_uso].nombre + " " + LOGIN.usuario[LOGIN.usuario_en_uso].apellido);
                 Console.WriteLine("MENU DEL ADMINISTRADOR");
                 Console.WriteLine("Elija una opcion \n1-Agregar cliente \n2-Editar cliente \n3-Eliminar cliente \n4-Reiniciar contraseña \n5-Agregar Saldo");
                 Console.WriteLine("6-Log de trasnacciones \n7-Configuracion del ATM \n8-Administrar usuarios \n9-Reactivacion de usuario \n10-Cerrar sesion");
@@ -67,7 +68,7 @@ namespace ITLA_ATM
                         log_trans();
                         break;
                     case (int)menu_admin.configurar_atm:
-                        
+                        ATM.MenuConfig();
                         break;
                     case (int)menu_admin.administrar_usuarios:
                         administrar_usuario();
@@ -378,7 +379,7 @@ namespace ITLA_ATM
                 switch (aa)
                 {
                     case "S":
-                        reiniciar_contra();
+                        agregar_saldo();
                         break;
                     case "N":
 
@@ -407,7 +408,7 @@ namespace ITLA_ATM
         {
             try
             {
-                
+                bool encontro=false; //esta variiable la usaremos para saber si se encontro un cliente con la tarjeta digitada
                 Console.Clear();
                 Console.WriteLine("LOG DE TRANSACCIONES \nDigite el # de tarjeta");
                 string tarjeta = Console.ReadLine();
@@ -415,34 +416,19 @@ namespace ITLA_ATM
                 {
                     if(item.numero_tarjeta == tarjeta)//Aqui buscamos segun la tarjeta
                     {
+                        
                         Console.WriteLine("*"+LOGIN.nombre_banco.ToUpper()+"*"+"\nTipo de transaccion : "+item.tipo_transaccion+"  Fecha  "+item.fecha_trans+"\n# de transaccion : "+item.numero_transacciones+"\n=========================\nCantidad depositada : "+item.monto_transacciones);
                         Console.WriteLine("Balance anterior : "+item.balance_anterio+" Nuevo balance : "+item.balance_nuevo+ "\n=========================");
 
-                        Console.ReadKey();
-                        Menu();
+                        encontro = true;//Aqui validamos que encontramos a un cliente
                     }
+                    
                 }
-                
-                Console.WriteLine("# de tarjeta no ha sido encontrado \nDesea realizar otra busqueda? S/N");
-                string aa = Console.ReadLine();
-                switch (aa)
-                {
-                    case "S":
-                        log_trans();
-                        break;
-                    case "N":
 
-                        Console.WriteLine("VOLVIENDO AL MENU . . .");
-                        Console.ReadKey();
-                        Menu();
-                        break;
-                    default:
-                        Console.WriteLine("OPCION INVALIDA");
-                        Console.WriteLine("VOLVIENDO AL MENU . . .");
-                        Console.ReadKey();
-                        Menu();
-                        break;
-                }
+                Console.ReadKey();
+                Menu();
+
+                
                 
 
             }
@@ -454,75 +440,7 @@ namespace ITLA_ATM
                 Menu();
             }
         }
-
-        public static void cambiar_nombre_banco()//ESTA OPCION SERA AÑADIDA A LAS CONFIGURACIONES DEL ATM
-        {
-            try { 
-            Console.Clear();
-            Console.WriteLine("Esta seguro que desea cambiar el nombre del banco? S/N");
-            string a = Console.ReadLine();
-            switch (a)
-            {
-                case "S":
-                    Console.WriteLine("ingrese el nuevo nombre del banco");
-                    string nombre = Console.ReadLine();
-                    LOGIN.nombre_banco = nombre;
-                    Console.WriteLine("EL NUEVO NOMBRE DEL BANCO ES :" + LOGIN.nombre_banco);
-                    Console.ReadKey();
-                    Menu();//Se supone que vuelva al menu de configuraciones, no al menu principal
-                    break;
-                case "N":
-                    Console.WriteLine("VOLVIENDO AL MENU . . .");
-                    Console.ReadKey();
-                    Menu();
-                    break;
-                default:
-                    Console.WriteLine("OPCION INVALIDA");
-                    Console.WriteLine("VOLVIENDO AL MENU . . .");
-                    Console.ReadKey();
-                    Menu();
-                    break;
-            }
-        }
-              catch (Exception ex)
-            {
-                Console.WriteLine("Error, volviendo al menu . . .");
-                Console.ReadKey();
-                Menu();
-            }
-
-        }
-
-        public static void papeletas_200_1000()//AQUI ESTAMOS TRATANDO DE CONFIGURAR COMO SOLTAR LOS BILLETES DEL CAJERO
-        {
-            try
-            {
-                int retiro = 0, prueba, multiplo;
-
-                prueba = retiro % 1000;
-                if (prueba == 0 || prueba == 200 || prueba == 400 || prueba == 600 || prueba == 800)//Aqui decimos que si el reciduo de lo que esta arriba es uno de esos resultadod
-                                                                                                    //es porque es un multiplo de mil y tiene tambien un multiplo de 200, asi que podemos procesar el cobro
-                {
-                    multiplo = retiro / 1000;
-                    multiplo = multiplo * 1000;
-                    retiro = retiro - multiplo;
-                    retiro = retiro - retiro;
-                    Console.WriteLine(retiro);
-                }
-                else if (retiro % 200 == 0) //Aqui decimos que si es un multiplo de 200 entonces el residuo sera 0 por lo cual podremos dispensar de a billites de 200
-                {
-                    retiro = retiro - retiro;
-                    Console.WriteLine(retiro);
-                }
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine("Error \nVOLVIENDO AL MENU . . .");
-                Console.ReadKey();
-                Menu();
-            }
-        }
-
+       
         public static void administrar_usuario()//Menu para editar usuarios de tipo admin
         {
             try {
@@ -613,7 +531,7 @@ namespace ITLA_ATM
                 Console.WriteLine("EDITAR ADMIN");
                 Console.WriteLine("\nDigite el # de tarjeta");
                 string tarjeta = Console.ReadLine();
-                if(tarjeta == LOGIN.usuario_en_uso)
+                if(tarjeta == LOGIN.usuario[LOGIN.usuario_en_uso].numero_tarjeta)
                 {
                     Console.WriteLine("UN ADMIN NO PUEDE EDITARSE A SI MISMO \nVOLVIENDO AL MENU . . .");
                     administrar_usuario();
@@ -705,7 +623,7 @@ namespace ITLA_ATM
                 Console.Clear();
                 Console.WriteLine("ELIMINAR USUARIO ADMIN \nDigite el # de tarjeta");
                 string tarjeta = Console.ReadLine();
-                if(tarjeta == LOGIN.usuario_en_uso)
+                if(tarjeta == LOGIN.usuario[LOGIN.usuario_en_uso].numero_tarjeta)
                 {
                     Console.WriteLine("UN USUARIO NO PUEDE ELIMINARSE EL MISMO \nVOLVIENDO AL MENU . . .");
                     Console.ReadKey();
@@ -773,7 +691,8 @@ namespace ITLA_ATM
 
         public static void reactivar_usuario()
         {
-            try { 
+            try {
+                Console.Clear();
             Console.WriteLine("REACTIVAR USUARIO \nDigete el # de tarjeta del usuario");
             string tarjeta = Console.ReadLine();
             int contador = 0;
@@ -796,7 +715,10 @@ namespace ITLA_ATM
                         {
                             case "S":
                                 item.isactive = true;
-                                break;
+                                    Console.WriteLine("Usuario ha sido reactivado \nVOLVIENDO AL MENU . . .");
+                                    Console.ReadKey();
+                                    Menu();
+                                    break;
                             case "N":
                                 Console.WriteLine("VOLVIENDO AL MENU . . .");
                                 Console.ReadKey();
