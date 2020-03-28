@@ -24,6 +24,9 @@ namespace ITLA_ATM
             VOLVER
         }
 
+        /* Declaracion de lista de denominaciones */
+        public static List<Denominacion> Denominaciones = new List<Denominacion>();
+
         /* Declaracion de estructura de denominaciones */
 
         public struct Denominacion {
@@ -31,8 +34,11 @@ namespace ITLA_ATM
             public int cantidad { get; set; }
         }
 
-        /* Declaracion de lista de denominaciones */
-        public static List<Denominacion> Denominaciones = new List<Denominacion>();
+        /* Declaracion de lista de para empresas de tarjetas */
+        public static List<string> EmpresaTarjetas = new List<string>();
+
+        /* Declaracion de lista de para monto de tarjetas */
+        public static List<int> MontosTarjetas = new List<int>();
 
         /* Metodo para desplegar menu de cliente */
         public static void MenuCliente()
@@ -57,7 +63,7 @@ namespace ITLA_ATM
                         break;
 
                     case (int)MenuClientEnum.COMPRAR_TARJETA:
-                        
+                        ComprarTarjetas();
                         break;
 
                     case (int)MenuClientEnum.CONSULTAR_BALANCE:
@@ -123,7 +129,7 @@ namespace ITLA_ATM
             }
 
         // Metodo para cambiar nombre del banco
-        public static void cambiar_nombre_banco()//ESTA OPCION SERA AÑADIDA A LAS CONFIGURACIONES DEL ATM
+        public static void cambiar_nombre_banco()
         {
             try
             {
@@ -200,7 +206,7 @@ namespace ITLA_ATM
             Console.WriteLine("Su balance es de RD$ " + LOGIN.usuario[LOGIN.usuario_en_uso].saldo);
         }
 
-        // Metodo para ver balance del cliente
+        // Metodo para ver depositar en la cuenta del cliente
         public static void DepositarEfectivo()
         {
             // Solicitar al cliente la cantidad que desea depositar
@@ -218,13 +224,91 @@ namespace ITLA_ATM
                 Console.WriteLine("El deposito fue exitoso");
                 ConsultarBalance();
 
+                // Esperar para volver
+                Console.ReadKey();
+                MenuCliente();
+
             }
             catch (Exception e) {
                 Console.WriteLine(e.Message + "VOLVIENDO AL MENU...");
+                Console.ReadKey();
+                MenuCliente();
+            }
+        }
+
+        // Metodo para comprar tarjetas de llamada
+        public static void ComprarTarjetas()
+        {
+
+            //Uso de try catch para evitar errores
+            try
+            {
+                // Solicitar al cliente la cantidad que desea depositar
+                Console.WriteLine("Seleccione la compañía de la cual quiere comprar la tarjeta:");
+
+                // Contador de empresa
+                int EmpresaCount = 0;
+
+                // Recorrer lista de empresas para imprimir opciones
+                foreach (string empresa in EmpresaTarjetas)
+                {
+                    Console.WriteLine((EmpresaCount+1) + "- " + empresa);
+
+                    // Incrementar contador
+                    EmpresaCount++;
+
+                }
+
+                // Almacenar la opcion de empresa elegida
+                int EmpresaOpcion = Convert.ToInt32(Console.ReadLine());
+
+                // Solicitar al cliente la cantidad que desea depositar
+                Console.WriteLine("Seleccione el monto de la tarjeta que quiere comprar:");
+
+                // Contador de empresa
+                int MontoCount = 0;
+
+                // Recorrer lista de empresas para imprimir opciones
+                foreach (int monto in MontosTarjetas)
+                {
+                    Console.WriteLine((EmpresaCount + 1) + "- " + monto);
+
+                    // Incrementar contador
+                    MontoCount++;
+                }
+
+                // Almacenar la opcion de empresa elegida
+                int MontoOpcion = Convert.ToInt32(Console.ReadLine());
+
+                // Comprobar si la cuenta tiene suficiente como para realizar la compra
+                if (LOGIN.usuario[LOGIN.usuario_en_uso].saldo >= MontosTarjetas[MontoOpcion-1])
+                {
+                    
+                    // Imprimir resultados
+                    Console.WriteLine("Compañia de telefono:" + EmpresaTarjetas[EmpresaOpcion - 1]);
+                    Console.WriteLine("Monto de la tarjeta:" + MontosTarjetas[MontoOpcion - 1]);
+                    Console.WriteLine("Balance Anterior:" + LOGIN.usuario[LOGIN.usuario_en_uso].saldo);
+
+                    // Debitar cantidad de la compra a la cuenta
+                    LOGIN.usuario[LOGIN.usuario_en_uso].saldo -= MontosTarjetas[MontoOpcion - 1];
+
+                    Console.WriteLine("Nuevo Balance:" + LOGIN.usuario[LOGIN.usuario_en_uso].saldo);
+                }
+
+                // Esperar para volver
+                Console.ReadKey();
+                MenuCliente();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message + "VOLVIENDO AL MENU...");
+                Console.ReadKey();
                 MenuCliente();
             }
 
-            
+
         }
+
+
     }
 }
